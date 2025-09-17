@@ -1,103 +1,151 @@
-import Image from "next/image";
+"use client";
+
+import { useTheme } from "next-themes";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Sun, Moon, BarChart3, TrendingUp, Shield } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
+  const { theme, setTheme } = useTheme();
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+     <div className="min-h-screen flex flex-col bg-background text-foreground">
+      {/* Navbar */}
+      <nav className="flex items-center justify-between px-6 py-4 border-b">
+        <Link href="/" className="text-2xl font-bold">
+          TradeJournal<span className="text-primary">X</span>
+        </Link>
+        <div className="flex items-center gap-6">
+          <Link href="#features" className="hover:text-primary">Features</Link>
+          <Link href="#analytics" className="hover:text-primary">Analytics</Link>
+          <Link href="#pricing" className="hover:text-primary">Pricing</Link>
+          <Button asChild>
+            <Link href="/auth/login">Get Started</Link>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </Button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </nav>
+
+      {/* Hero */}
+      <section className="flex flex-col items-center text-center py-20 px-6">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-5xl md:text-6xl font-extrabold mb-6"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Master Your <span className="text-primary">Trades</span> with Confidence
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          A professional trading journal to track, analyze, and grow your portfolio.  
+          Gain insights and become a disciplined trader.
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.8 }}
+          className="flex gap-4"
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+          <Button size="lg" asChild>
+            <Link href="/signup">Start Free</Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="#features">Learn More</Link>
+          </Button>
+        </motion.div>
+      </section>
+
+      {/* Features */}
+      <section id="features" className="py-20 px-6 bg-muted/50">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-12">Why Choose TradeJournalX?</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="p-6">
+              <CardContent className="flex flex-col items-center text-center">
+                <BarChart3 className="h-12 w-12 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Smart Analytics</h3>
+                <p className="text-muted-foreground">
+                  Visualize your trades with modern charts and gain insights instantly.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="p-6">
+              <CardContent className="flex flex-col items-center text-center">
+                <TrendingUp className="h-12 w-12 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Performance Tracking</h3>
+                <p className="text-muted-foreground">
+                  Monitor your growth, win-rate, and risk-to-reward ratio in real-time.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="p-6">
+              <CardContent className="flex flex-col items-center text-center">
+                <Shield className="h-12 w-12 text-primary mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Secure & Private</h3>
+                <p className="text-muted-foreground">
+                  Your trading data is encrypted and safe. Privacy is our priority.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Analytics Preview */}
+      <section id="analytics" className="py-20 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-6">Powerful Analytics Dashboard</h2>
+          <p className="text-muted-foreground mb-12">
+            Track performance metrics, PnL, and detailed trade history with ease.
+          </p>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="bg-muted rounded-2xl shadow-lg p-12"
+          >
+            <div className="h-64 flex items-center justify-center text-muted-foreground">
+              📊 [Analytics Chart Preview Here]
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6 bg-primary text-primary-foreground text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-4xl font-bold mb-6"
+        >
+          Ready to Level Up Your Trading?
+        </motion.h2>
+        <p className="mb-8 text-lg">
+          Join thousands of traders using TradeJournalX to build consistency and profitability.
+        </p>
+        <Button size="lg" variant="secondary" asChild>
+          <Link href="/signup">Get Started Today</Link>
+        </Button>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-6 border-t text-center text-sm text-muted-foreground">
+        © {new Date().getFullYear()} TradeJournalX. All rights reserved.
       </footer>
     </div>
+  
   );
 }
