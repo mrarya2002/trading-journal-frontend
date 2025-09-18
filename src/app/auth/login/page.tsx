@@ -37,7 +37,9 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:8080/api/auth/login", formData);
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+
+      const res = await axios.post(`${API_URL}/api/auth/login`, formData);
 
       // assuming backend returns { token: "jwt_here" }
       localStorage.setItem("token", res.data.token);

@@ -34,10 +34,9 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/auth/register",
-        formData
-      );
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+
+      const res = await axios.post(`${API_URL}/api/auth/register`, formData);
 
       toast.success("Registration successful 🎉");
 
